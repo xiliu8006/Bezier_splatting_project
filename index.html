@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Bézier Splatting</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:image" content="https://bezier-splatting.github.io/bezier-splatting/img/pipeline.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1711">
+    <meta property="og:image:height" content="576">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bezier-splatting.github.io/bezier-splatting/"/>
+    <meta property="og:title" content="Bézier Splatting for Fast, Differentiable, and High-Fidelity Vector Graphics" />
+    <meta property="og:description" content=""/>
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Bézier Splatting for Fast, Differentiable, and High-Fidelity Vector Graphics" />
+    <meta name="twitter:description" content=""/>
+    <meta name="twitter:image" content="" />
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+	<link rel="stylesheet" href="css/fontawesome.all.min.css">
+	<link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+
+	<!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8ZERS5BVPS"></script>
+  <script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-8ZERS5BVPS');
+  </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+	<script defer src="js/fontawesome.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/synced_video_selector.js"></script>
+
+</head>
+
+<body style="padding: 1%; width: 100%">
+    <div class="container-lg text-center" style="max-width: 1500px; margin: auto;" id="main">
+    <!-- <div class="container" id="main"> -->
+        <div class="row">
+            <h2 class="col-md-12 text-center">
+                <b>Bézier Splatting for Fast and Differentiable Vector Graphics</b></br> 
+            </h2>
+        </div>
+        <!-- <h3 class="title is-4">Bézier Splatting for Fast and Differentiable Vector Graphics</h3> -->
+        <br>
+        <div class="col-md-8 col-md-offset-2">
+            <!-- 显示放大图片 -->
+            <div class="image-container">
+                <img id="mainImage" src="img/teaser.png" alt="Selected Image" 
+                    style="height: auto; max-width: 100%; border: 0px solid #000;">
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    <b>Abstract</b>
+                </h3>
+                <p class="text-justify">
+                    Differentiable vector graphics (VGs) are widely used in image vectorization and vector synthesis, while existing representations are costly to optimize and struggle to achieve high-quality rendering results for high-resolution images. This work introduces a new differentiable VG representation, dubbed Bézier Splatting, that enables fast yet high-fidelity VG rasterization. Bézier Splatting samples 2D Gaussians along Bézier curves, which naturally provide positional gradients at object boundaries. Thanks to the efficient splatting-based differentiable rasterizer, Bézier splatting achieves over 20× and 150× faster per forward and backward rasterization step for open curves compared to DiffVG. Additionally, we introduce an adaptive pruning and densification strategy that dynamically adjusts the spatial distribution of curves to escape local minima, further improving VG quality. Experimental results show that Bézier splatting significantly outperforms existing methods with better visual fidelity and 10× faster optimization speed.
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <image src="img/pipeline.png" width=100% style="display: block; margin: auto;"></image>
+            </div>
+        </div><br><br>
+
+        <div class="col-md-8 col-md-offset-2">
+            <h2 class="col-md-12 text-center">
+                <b>Bézier Splatting enables high-fidelity image vectorization</b></br> 
+            </h2>
+            <div class="image-container">
+                <img id="mainImage" src="img/main.png" alt="Selected Image" 
+                    style="height: auto; max-width: 100%; border: 0px solid #000;">
+            </div>
+        </div>
+
+
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3><b> Open curve comparison</b></h3>
+                <div class="icon-container">
+                    <!-- Open Curve Buttons -->
+                    <button onclick="switchDataset('comparison_line_1024', 'open')" class="dataset-btn" data-folder="comparison_line_1024" data-type="open">1024</button>
+                    <button onclick="switchDataset('comparison_line_512', 'open')" class="dataset-btn" data-folder="comparison_line_512" data-type="open">512</button>
+                    <button onclick="switchDataset('comparison_line_256', 'open')" class="dataset-btn" data-folder="comparison_line_256" data-type="open">256</button>
+
+                </div>
+                <br>
+                <div class="text-center">
+                    <!-- 显示放大图片 -->
+                    <div class="image-container">
+                        <img id="mainImageOpen" src="img/comparison_line/line_1024_0300.png" alt="Selected Image" 
+                            style="height: auto; max-width: 100%; border: 0px solid #000;">
+                    </div>
+            
+                    <!-- 缩略图容器 -->
+                    <div class="pill-row scene-pills" id="scene-pills-open"></div>
+                </div>
+            </div>
+            
+            <div class="col-md-8 col-md-offset-2">
+                <h3><b> Closed curve comparison</b></h3>
+                <div class="icon-container">
+                    <button onclick="switchDataset('comparison_area_1024', 'closed')" class="dataset-btn" data-folder="comparison_area_1024" data-type="closed">1024</button>
+                    <button onclick="switchDataset('comparison_area_512', 'closed')" class="dataset-btn" data-folder="comparison_area_512" data-type="closed">512</button>
+                    <button onclick="switchDataset('comparison_area_256', 'closed')" class="dataset-btn" data-folder="comparison_area_256" data-type="closed">256</button>
+                </div>
+                <br>
+                <div class="text-center">
+                    <!-- 显示放大图片 -->
+                    <div class="image-container">
+                        <img id="mainImageClosed" src="img/comparison_area/area_1024_0300.png" alt="Selected Image" 
+                            style="height: auto; max-width: 100%; border: 0px solid #000;">
+                    </div>
+            
+                    <!-- 缩略图容器 -->
+                    <div class="pill-row scene-pills" id="scene-pills-closed"></div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                <b>Training process visualization</b>
+                </h3><br>
+
+                <div class="text-center">
+                    <!-- 显示放大图片 -->
+                    <div class="image-container">
+                        <img id="mainImage" src="img/training_step.png" alt="Selected Image" 
+                            style="height: auto; max-width: 100%; border: 0px solid #000;">
+                    </div>
+
+                    <br>
+                    <p class="text-justify" style="text-align: center; font-size: 18px;">
+                        Trained with 1024 closed and open curvers
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center">
+              <h4><b>Video Visulaization</b></h4><br>
+              <video id="trainingVideo" controls style="max-width:70%; height:auto; border:0;">
+                <source src="videos/out.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+              </video>
+              <p style="margin-top:10px;">Playback of the full training process of a 2040x1848 image (1024 open curves on RTX-4090 )</p>
+            </div>
+          </div> -->
+
+          <div class="col-md-8 col-md-offset-2">
+            <h3><b>Efficiency comparison</b></h3>
+          
+            <!-- Image section -->
+            <div class="text-center">
+              <div class="image-container">
+                <img id="mainImage" src="img/scatter.png" alt="Selected Image"
+                     style="height:auto; max-width:50%; border:0;">
+              </div>
+              <p style="font-size:18px;">
+                Trained with 2048 open curves on DIV2K DATASET
+              </p>
+              <div class="pill-row scene-pills" id="scene-pills"></div>
+            </div>
+          
+            <br>
+          
+    <!-- Speed comparison table -->
+    <table class="table table-bordered" style="font-size: 12px; text-align: center; width: 50%; height: auto; margin: 0 auto;">
+        <thead>
+            <tr>
+              <th style="text-align: center; vertical-align: middle;"> </th>
+              <th style="text-align: center; vertical-align: middle;"> </th>
+              <th style="text-align: center; vertical-align: middle;">DiffVG</th>
+              <th style="text-align: center; vertical-align: middle;">Bézier splatting</th>
+              <th style="text-align: center; vertical-align: middle;">Speedup</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td rowspan="2">Open</td><td>Forward</td><td>141.3 ms</td><td><strong>7.2 ms</strong></td><td>19.6×</td>
+        </tr>
+        <tr>
+            <td>Backward</td><td>701.3 ms</td><td><strong>4.7 ms</strong></td><td>149.2×</td>
+        </tr>
+        <tr>
+            <td rowspan="2">Closed</td><td>Forward</td><td>85.2 ms</td><td><strong>14.2 ms</strong></td><td>6.0×</td>
+        </tr>
+        <tr>
+            <td>Backward</td><td>448.3 ms</td><td><strong>15.7 ms</strong></td><td>28.5×</td>
+        </tr>
+        </tbody>
+    </table>
+    <caption style="text-align: center; font-size: 14px; word-break: break-word; display: block; width: 50%;">
+        Forward and backward speed of DiffVG and Bézier splatting (tested on a 2,040×1,344 image, using 2,048 curves).
+    </caption>
+    <br>
+    <div style="height:70px;"></div>
+
+      
+          
+        
+<script>
+
+    var currentImageIndex = 0;
+    var images = document.querySelectorAll('#image-container .img-slide');
+
+    function nextImage() {
+        changeImage(1);
+    }
+
+    function previousImage() {
+        changeImage(-1);
+    }
+
+    function changeImage(step) {
+        // Hide the current image
+        images[currentImageIndex].classList.remove('active');
+        images[currentImageIndex].classList.add('hidden'); // Ensure it gets hidden
+
+        // Calculate the new index using modulo operation to wrap around
+        currentImageIndex = (currentImageIndex + step + images.length) % images.length;
+
+        // Show the new current image
+        images[currentImageIndex].classList.add('active');
+        images[currentImageIndex].classList.remove('hidden'); // Ensure it is visible
+    }
+
+    // let firstSecondPart = 'comparison_line';
+    // let secondThirdPart = 'line_256';
+
+    
+    let firstSecondPart = 'comparison_line';
+    let secondThirdPart = 'line_1024';
+
+    function switchDataset(folder, type) {
+        let parts = folder.split("_");
+
+        // 获取第 1 个 和 第 2 个的组合
+        firstSecondPart = parts.length > 1 ? `${parts[0]}_${parts[1]}` : folder;
+
+        // 获取第 2 个 和 第 3 个的组合
+        secondThirdPart = parts.length > 2 ? `${parts[1]}_${parts[2]}` : "";
+
+        // 根据 `type` 设置 `containerId` 和 `mainImageId`
+        let containerId = type === "open" ? "scene-pills-open" : "scene-pills-closed";
+        let mainImageId = type === "open" ? "mainImageOpen" : "mainImageClosed";
+
+        console.log(`Switching dataset: ${folder} -> ${firstSecondPart}/${secondThirdPart}`);
+        console.log(`Using container: ${containerId}, Main Image: ${mainImageId}`);
+        updateButtonHighlight(folder, type);
+        // 重新生成缩略图
+        generateThumbnails(containerId, mainImageId);
+    }
+
+    function generateThumbnails(containerId, mainImageId) {
+        let container = document.getElementById(containerId);
+        container.innerHTML = ""; // 清空旧缩略图
+
+        let datasets = [
+            "0300", "0112", "0760", "0496", "0168", "0208",
+            "0280", "0400",
+            "0420", "0428", "0432",
+            "0564",
+        ];
+
+        datasets.forEach(dataset => {
+            let imgPath = `img/${firstSecondPart}/${secondThirdPart}_${dataset}.png`;
+            console.log(`Generating thumbnail: ${imgPath}`);
+
+            let span = document.createElement("span");
+            span.className = "pill scene-pill";
+            span.setAttribute("data-value", dataset);
+
+            let img = document.createElement("img");
+            img.className = "thumbnail-img";
+            img.src = imgPath;
+            img.alt = dataset;
+            img.width = 64;
+
+            // ✅ 绑定 click 事件，传递 mainImageId
+            span.addEventListener("click", function () {
+                console.log(`Clicked thumbnail: ${dataset}, Updating main image: ${imgPath}`);
+                changeMainImage(imgPath, mainImageId);
+            });
+
+            span.appendChild(img);
+            container.appendChild(span);
+        });
+
+        // 默认选中第一张缩略图
+        if (datasets.length > 0) {
+            let defaultImgPath = `img/${firstSecondPart}/${secondThirdPart}_${datasets[0]}.png`;
+            console.log(`✅ Default main image: ${defaultImgPath}`);
+            changeMainImage(defaultImgPath, mainImageId);
+        }
+    }
+
+    function changeMainImage(imagePath, mainImageId) {
+        let imgElement = document.getElementById(mainImageId);
+        console.log(`Updating main image: ${imagePath} -> ${mainImageId}`);
+
+        if (imgElement) {
+            imgElement.src = imagePath;
+            console.log(`✅ Image updated successfully: ${imagePath}`);
+        } else {
+            console.error(`❌ Error: Image element with id "${mainImageId}" not found!`);
+        }
+    }
+
+    // 页面加载时生成 Open 和 Closed 的缩略图
+    window.onload = function () {
+        generateThumbnails("scene-pills-open", "mainImageOpen");
+        firstSecondPart = 'comparison_area';
+        secondThirdPart = 'area_256';
+        generateThumbnails("scene-pills-closed", "mainImageClosed");
+    };
+
+    function updateButtonHighlight(folder, type) {
+        let buttons = document.querySelectorAll(`.dataset-btn[data-type="${type}"]`);
+        
+        buttons.forEach(btn => {
+            if (btn.getAttribute("data-folder") === folder) {
+                btn.classList.add("active"); // 选中的按钮高亮
+            } else {
+                btn.classList.remove("active"); // 取消其他按钮的高亮
+            }
+        });
+    }
+
+    // 页面加载后生成缩略图
+    // generateThumbnails();
+    // generateThumbnails();
+</script>
+<style>
+    .icon-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    }
+
+    .dataset-btn {
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        border: 2px solid #000;
+        background-color: rgba(255, 255, 255, 0.6); /* 半透明白色 */
+        border-radius: 5px;
+        transition: background-color 0.3s, opacity 0.3s;
+        opacity: 0.5; /* 默认半透明 */
+    }
+
+    .dataset-btn:hover {
+        background-color: rgba(255, 255, 255, 0.9); /* 悬停时变亮 */
+        opacity: 1;
+    }
+
+    .dataset-btn.active {
+        background-color: blue; /* 选中的按钮变蓝 */
+        color: white;
+        opacity: 0.7; /* 选中后完全不透明 */
+    }
+
+    .thumbnail-img {
+        border: 2px solid transparent;
+        cursor: pointer;
+    }
+
+    .thumbnail-img:hover {
+        border: 2px solid #000;
+    }
+</style>
+</body>
+</html>
