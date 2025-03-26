@@ -153,9 +153,10 @@ span.highlight {
 }
 
 .list-inline > li {
-	display: inline-block;
-	margin-left: 0.5em;
-	margin-right: 0.5em;
+  display: inline-block;
+  padding: 0.6em 0.3em 0.1em;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
 }
 
 .list-inline > li > a {
