@@ -158,6 +158,26 @@ span.highlight {
 	margin-right: 0.5em;
 }
 
+.list-inline > li > a {
+  display: inline-block;
+  padding: 0.6em 0.3em 0.1em 0.3em;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  color: black;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.list-inline > li > a {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.list-inline > li > a:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* 浅灰高亮背景 */
+  color: #000;                         /* 悬停时字体颜色 */
+  border-radius: 4px;                  /* 圆角效果，更美观 */
+}
+
 
 .switch {
   position: relative;
