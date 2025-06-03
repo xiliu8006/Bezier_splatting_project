@@ -65,7 +65,7 @@
     <!-- <div class="container" id="main"> -->
         <div class="row">
             <h2 class="col-md-12 text-center">
-                <b>Bézier Splatting for Fast and Differentiable Vector Graphics</b></br> 
+                <b>Bézier Splatting for Fast and Differentiable Vector Graphics Rendering</b></br> 
             </h2>
         </div>
 
@@ -141,7 +141,7 @@
         </div>
 
 
-        <div class="row">
+         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
                     <b>Abstract</b>
@@ -163,7 +163,7 @@
                 <b>Bézier Splatting enables high-fidelity image vectorization</b></br> 
             </h2>
             <div class="image-container">
-                <img id="mainImage" src="img/main.png" alt="Selected Image" 
+                <img id="mainImage" src="img/overall.png" alt="Selected Image" 
                     style="height: auto; max-width: 100%; border: 0px solid #000;">
             </div>
         </div>
@@ -216,6 +216,29 @@
             </div>
             
         </div>
+
+                <br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                <b> Editability and Compatibility with SVG XML Format</b>
+                </h3><br>
+
+                <div class="text-center">
+                    <!-- 显示放大图片 -->
+                    <div class="image-container">
+                        <img id="mainImage" src="img/svg-xml.png" alt="Selected Image" 
+                            style="height: auto; max-width: 100%; border: 0px solid #000;">
+                    </div>
+
+                    <br>
+                    <p class="text-justify" style="text-align: center; font-size: 18px;">
+                        Our Bézier Splatting representation is compatible with the standard SVG XML format and
+supports flexible vector editing operations.
+                    </p>
+                </div>
+            </div>
+        </div>
         
         <br>
         <div class="row">
@@ -239,22 +262,49 @@
             </div>
         </div>
 
-        <!-- <div class="row">
-            <div class="col-md-8 col-md-offset-2 text-center">
-              <h4><b>Video Visulaization</b></h4><br>
-              <video id="trainingVideo" controls style="max-width:70%; height:auto; border:0;">
-                <source src="videos/out.mp4" type="video/mp4">
-                Your browser does not support HTML5 video.
-              </video>
-              <p style="margin-top:10px;">Playback of the full training process of a 2040x1848 image (1024 open curves on RTX-4090 )</p>
-            </div>
-          </div> -->
+        <!-- 标题 -->
+        <div class="row text-center">
+        <div class="col-md-12">
+            <h3><b>Adaptability with Layer-wised Image Vectorization</b></h3>
+            <br>
+        </div>
+        </div>
+
+        <!-- 视频 1 -->
+        <div class="row">
+        <div class="col-md-12 text-center">
+            <h4><b>Emoji</b></h4>
+            <video controls style="max-width:100%; height:auto; border:0;">
+            <source src="videos/out.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+            </video>
+            <p style="margin-top:10px;">
+            Adding one path at a time
+            </p>
+        </div>
+        </div>
+
+        <!-- 视频 2 -->
+        <div class="row">
+        <div class="col-md-12 text-center">
+            <h4><b>Natural Image From DIV2K</b></h4>
+            <video controls style="max-width:50%; height:auto; border:0;">
+            <source src="videos/out-complex.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+            </video>
+            <p style="margin-top:10px;">
+            Progressively adding 1, 2, 4, ..., up to 32 paths until reaching 512 in total
+            </p>
+        </div>
+        </div>
+
+
 
           <div class="col-md-8 col-md-offset-2">
             <h3><b>Efficiency comparison</b></h3>
           
             <!-- Image section -->
-            <div class="text-center">
+            <!-- <div class="text-center">
               <div class="image-container">
                 <img id="mainImage" src="img/scatter.png" alt="Selected Image"
                      style="height:auto; max-width:50%; border:0;">
@@ -265,7 +315,7 @@
               <div class="pill-row scene-pills" id="scene-pills"></div>
             </div>
           
-            <br>
+            <br> -->
           
     <!-- Speed comparison table -->
     <table class="table table-bordered" style="font-size: 12px; text-align: center; width: 50%; height: auto; margin: 0 auto;">
@@ -280,29 +330,22 @@
         </thead>
         <tbody>
         <tr>
-            <td rowspan="2">Open</td><td>Forward</td><td>141.3 ms</td><td><strong>7.2 ms</strong></td><td>19.6×</td>
+            <td rowspan="2">Open</td><td>Forward</td><td>141.3 ms</td><td><strong>4.5 ms</strong></td><td>31.4×</td>
         </tr>
         <tr>
             <td>Backward</td><td>701.3 ms</td><td><strong>4.7 ms</strong></td><td>149.2×</td>
         </tr>
         <tr>
-            <td rowspan="2">Closed</td><td>Forward</td><td>85.2 ms</td><td><strong>14.2 ms</strong></td><td>6.0×</td>
+            <td rowspan="2">Closed</td><td>Forward</td><td>85.2 ms</td><td><strong>14.1 ms</strong></td><td>6.0×</td>
         </tr>
         <tr>
-            <td>Backward</td><td>448.3 ms</td><td><strong>15.7 ms</strong></td><td>28.5×</td>
+            <td>Backward</td><td>448.3 ms</td><td><strong>24.58 ms</strong></td><td>18.2×</td>
         </tr>
         </tbody>
     </table>
-    <br>
-    <!-- <caption style="text-align: center; font-size: 18px;">
-        Forward and backward speed.
-    </caption> -->
-    <p class="text-justify" style="text-align: center; font-size: 18px;">
-        Forward and backward speed DiffVG and Bézier splatting.
-    <p>
-    <p class="text-justify" style="text-align: center; font-size: 18px;">
-        Test on a 2,040×1,344 image, using 2,048 curves.
-    <p>
+    <caption style="text-align: center; font-size: 14px; word-break: break-word; display: block; width: 50%;">
+        Forward and backward speed of DiffVG and Bézier splatting (tested on a 2,040×1,344 image, using 2,048 curves).
+    </caption>
     <br>
     <div style="height:70px;"></div>
 
@@ -367,11 +410,28 @@
         container.innerHTML = ""; // 清空旧缩略图
 
         let datasets = [
-            "0300", "0112", "0760", "0496", "0168", "0208",
-            "0280", "0400",
-            "0420", "0428", "0432",
-            "0564",
+            "0364", "0012", "0420", "0040", "0068", "0552", "0448",
+            "0280", "0072", "0084", "0744", "0764", "0544", "0300",
+            "0168", "0400", "0496", "0564", "0648", "0196"
         ];
+
+
+        // let datasets =  [
+        //     "0364", "0112", "0168", "0208",
+        //     "0280", "0300", "0400", "0012",
+        //     "0420", "0428", "0432", "0496",
+        //     "0564", "0760", "0040", "0068",
+        //     "0072", "0084", "0108", "0436",
+        //     "0448", "0544", "0552", "0592",
+        //     "0624", "0648", "0744", "0764",
+        // ] ;
+
+        // let datasets = [
+        //     "0300", "0364", "0760", "0496", "0168", "0208",
+        //     "0280", "0400",
+        //     "0420", "0428", "0432",
+        //     "0564",
+        // ];
 
         datasets.forEach(dataset => {
             let imgPath = `img/${firstSecondPart}/${secondThirdPart}_${dataset}.png`;
@@ -421,7 +481,7 @@
     window.onload = function () {
         generateThumbnails("scene-pills-open", "mainImageOpen");
         firstSecondPart = 'comparison_area';
-        secondThirdPart = 'area_256';
+        secondThirdPart = 'area_1024';
         generateThumbnails("scene-pills-closed", "mainImageClosed");
     };
 
